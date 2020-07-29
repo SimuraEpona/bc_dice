@@ -26,3 +26,5 @@ bc_dice-*.tar
 
 .vscode/
 
+src/dice_lexer.erl
+
