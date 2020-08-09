@@ -1,5 +1,7 @@
 defmodule BCDice.Tokenizer do
   def tokenize(roll_string) do
+    roll_string = String.upcase(roll_string)
+
     with charlist <- String.to_charlist(roll_string),
          {:ok, tokens, _} <- :dice_lexer.string(charlist) do
       {:ok, tokens}

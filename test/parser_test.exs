@@ -8,10 +8,6 @@ defmodule BCDice.ParserTest do
       assert {:ok, 1} == Parser.parse([{:int, 1, '1'}])
     end
 
-    test "float" do
-      assert {:ok, 2.56987} == Parser.parse([{:float, 1, '2.56987'}])
-    end
-
     test "roll" do
       tokens = [
         {:int, 1, '1'},
@@ -56,19 +52,6 @@ defmodule BCDice.ParserTest do
 
       expected = {:sep, {:roll, 2, 4}, {:roll, 1, 6}}
 
-      assert {:ok, expected} == Parser.parse(tokens)
-    end
-
-    test "variable" do
-      tokens = [
-        {:int, 1, '1'},
-        {:roll, 1, 'd'},
-        {:int, 1, '4'},
-        {:basic_operator, 1, '+'},
-        {:var, 1, 'x'}
-      ]
-
-      expected = {{:operator, '+'}, {:roll, 1, 4}, {:var, 'x'}}
       assert {:ok, expected} == Parser.parse(tokens)
     end
 
