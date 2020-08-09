@@ -7,10 +7,6 @@ defmodule BCDice.TokenizerTest do
     assert {:ok, [{:int, 1, '2'}]} = Tokenizer.tokenize("2")
   end
 
-  test "float" do
-    assert {:ok, [{:float, 1, '3.14'}]} = Tokenizer.tokenize("3.14")
-  end
-
   test "roll" do
     assert {:ok,
             [
