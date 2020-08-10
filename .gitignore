@@ -29,3 +29,5 @@ bc_dice-*.tar
 src/dice_lexer.erl
 src/dice_parser.erl
 
+lib/play.exs
+
