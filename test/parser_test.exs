@@ -55,6 +55,16 @@ defmodule BCDice.ParserTest do
       assert {:ok, expected} == Parser.parse(tokens)
     end
 
+    test "choice" do
+      tokens = [
+        {:choice, 1, '2,3,BD'}
+      ]
+
+      expected = {:choice, ['2', '3', 'BD']}
+
+      assert {:ok, expected} == Parser.parse(tokens)
+    end
+
     test "subexpressions" do
       tokens = [
         {:"(", 1, '('},
