@@ -22,7 +22,8 @@ defmodule BCDice.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:gettext, ">= 0.0.0"}
+      {:gettext, ">= 0.0.0"},
+      {:nimble_parsec, "~> 0.6"}
     ]
   end
 end

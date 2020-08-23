@@ -1,8 +1,12 @@
 defmodule BCDice.Parser do
-  def parse(tokens) do
-    case :dice_parser.parse(tokens) do
-      {:ok, _} = resp -> resp
-      {:error, {_, :dice_parser, reason}} -> {:error, {:token_parsing_failed, reason}}
-    end
-  end
+  import NimbleParsec
+
+  int = integer(min: 1, max: 3)
+
+  roll =
+    int
+    |> concat(string("D") |> replace(:roll))
+    |> concat(int)
+
+  defparsec(:parse, roll)
 end
