@@ -5,6 +5,15 @@ defmodule BCDice.Ast do
   def compile({:ok, ast}), do: eval(ast)
   def compile(err = {:error, _}), do: err
 
+  defp eval([l, :barabara_roll, r]) when is_integer(l) and is_integer(r) do
+    faces = roll(l, r)
+    values = faces |> Enum.map(& &1.value) |> Enum.join(", ")
+    value = values
+    result = "(#{l}D#{r}) |> #{values}"
+
+    {:ok, %{faces: faces, secret: false, result: result, value: value}}
+  end
+
   defp eval([l, :roll, r]) when is_integer(l) and is_integer(r) do
     faces = roll(l, r)
     values = faces |> Enum.map(& &1.value) |> Enum.join(", ")

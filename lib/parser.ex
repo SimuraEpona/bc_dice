@@ -3,9 +3,12 @@ defmodule BCDice.Parser do
 
   int = integer(min: 1, max: 3) |> label("integer")
 
+  dice = string("D") |> replace(:roll) |> label("roll")
+  barabara_dice = string("B") |> replace(:barabara_roll) |> label("barabara roll")
+
   roll =
     int
-    |> concat(string("D") |> replace(:roll) |> label("roll"))
+    |> concat([dice, barabara_dice] |> choice())
     |> concat(int)
     |> eos()
 
