@@ -9,7 +9,7 @@ defmodule BCDice.Ast do
     faces = roll(l, r)
     values = faces |> Enum.map(& &1.value) |> Enum.join(", ")
     value = values
-    result = "(#{l}D#{r}) |> #{values}"
+    result = "(#{l}B#{r}) |> #{values}"
 
     {:ok, %{faces: faces, secret: false, result: result, value: value}}
   end
