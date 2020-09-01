@@ -14,11 +14,11 @@ defmodule BCDice.ParserTest do
       assert roll("1D6") == [1, :roll, 6]
     end
 
-    test "error format is wrong" do
-      assert roll("1D1000") == {:error, "expected end of string"}
-      assert roll("1D100,s") == {:error, "expected end of string"}
-      assert roll("a1D100") == {:error, "expected integer"}
-      assert roll("1Da100") == {:error, "expected integer"}
+    test "error format" do
+      assert {:error, _reason} = roll("1D1000")
+      assert {:error, _reason} = roll("1D100,s")
+      assert {:error, _reason} = roll("a1D100")
+      assert {:error, _reason} = roll("1Da100,s")
     end
   end
 
@@ -27,11 +27,27 @@ defmodule BCDice.ParserTest do
       assert roll("1B6") == [1, :barabara_roll, 6]
     end
 
-    test "error format is wrong" do
-      assert roll("1B1000") == {:error, "expected end of string"}
-      assert roll("1B100,s") == {:error, "expected end of string"}
-      assert roll("a1B100") == {:error, "expected integer"}
-      assert roll("1Ba100") == {:error, "expected integer"}
+    test "error format" do
+      assert {:error, _reason} = roll("1B1000")
+      assert {:error, _reason} = roll("1B100,s")
+      assert {:error, _reason} = roll("a1B1000")
+      assert {:error, _reason} = roll("1Ba100,s")
+    end
+  end
+
+  describe "compare roll dice" do
+    test "basic compare dice" do
+      assert roll("1D6>=5") == [1, :roll, 6, :>=, 5]
+      assert roll("1D6>5") == [1, :roll, 6, :>, 5]
+      assert roll("1D6<=5") == [1, :roll, 6, :<=, 5]
+      assert roll("1D6<5") == [1, :roll, 6, :<, 5]
+      assert roll("1D6=5") == [1, :roll, 6, :==, 5]
+    end
+
+    test "error format" do
+      assert {:error, _reason} = roll("1D6>=s")
+      assert {:error, _reason} = roll("1D6>=5s")
+      assert {:error, _reason} = roll("1D6s>=5")
     end
   end
 end
