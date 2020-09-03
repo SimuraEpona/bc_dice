@@ -11,11 +11,16 @@ msgid ""
 msgstr ""
 
 #, elixir-format
-#: lib/ast.ex:37
+#: lib/ast.ex:61
 msgid "fail"
 msgstr ""
 
 #, elixir-format
-#: lib/ast.ex:35
+#: lib/ast.ex:59
 msgid "success"
+msgstr ""
+
+#, elixir-format
+#: lib/ast.ex:38
+msgid "success count"
 msgstr ""

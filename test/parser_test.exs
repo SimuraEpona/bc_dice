@@ -50,4 +50,20 @@ defmodule BCDice.ParserTest do
       assert {:error, _reason} = roll("1D6s>=5")
     end
   end
+
+  describe "compare barabara roll dice" do
+    test "basic compare dice" do
+      assert roll("1B6>=5") == [1, :barabara_roll, 6, :>=, 5]
+      assert roll("1B6>5") == [1, :barabara_roll, 6, :>, 5]
+      assert roll("1B6<=5") == [1, :barabara_roll, 6, :<=, 5]
+      assert roll("1B6<5") == [1, :barabara_roll, 6, :<, 5]
+      assert roll("1B6=5") == [1, :barabara_roll, 6, :==, 5]
+    end
+
+    test "error format" do
+      assert {:error, _reason} = roll("1B6>=s")
+      assert {:error, _reason} = roll("1B6>=5s")
+      assert {:error, _reason} = roll("1B6s>=5")
+    end
+  end
 end

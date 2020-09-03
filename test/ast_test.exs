@@ -76,6 +76,50 @@ defmodule BCDice.AstTest do
     end
   end
 
+  describe "compare barabara roll dices" do
+    test "success dices" do
+      assert eventually_match([2, :barabara_roll, 6, :>=, 3], %{
+               result: "(2B6>=3) |> 3, 3 |> success count 2"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :>=, 3], %{
+               result: "(2B6>=3) |> 1, 1 |> success count 0"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :>, 3], %{
+               result: "(2B6>3) |> 5, 5 |> success count 2"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :>, 3], %{
+               result: "(2B6>3) |> 5, 1 |> success count 1"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :<=, 3], %{
+               result: "(2B6<=3) |> 5, 5 |> success count 0"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :<=, 3], %{
+               result: "(2B6<=3) |> 5, 1 |> success count 1"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :<, 3], %{
+               result: "(2B6<3) |> 5, 1 |> success count 1"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :<, 3], %{
+               result: "(2B6<3) |> 5, 5 |> success count 0"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :==, 3], %{
+               result: "(2B6=3) |> 5, 5 |> success count 0"
+             })
+
+      assert eventually_match([2, :barabara_roll, 6, :==, 3], %{
+               result: "(2B6=3) |> 3, 3 |> success count 2"
+             })
+    end
+  end
+
   test "error test" do
     assert {:error, "could not parsed"} == Ast.compile({:error, "could not parsed"})
   end

@@ -16,6 +16,30 @@ defmodule BCDice.Ast do
     {:ok, %{faces: faces, secret: false, result: result, value: value}}
   end
 
+  # 1B6>=5
+  defp eval([l, :barabara_roll, r, compare, v])
+       when is_integer(l) and is_integer(r) and is_integer(v) do
+    faces = roll(l, r)
+
+    values = faces |> calc_values_from_faces()
+    compare_string = compare |> Atom.to_string() |> String.replace("==", "=")
+
+    value =
+      faces
+      |> Enum.map(& &1.value)
+      |> Enum.filter(fn dice ->
+        ast = {compare, [], [dice, v]}
+        {compare_result, _} = Code.eval_quoted(ast)
+        compare_result
+      end)
+      |> Enum.count()
+
+    string =
+      "(#{l}B#{r}#{compare_string}#{v}) |> #{values} |> #{gettext("success count")} #{value}"
+
+    {:ok, %{faces: faces, secret: false, result: string, value: value}}
+  end
+
   # 1D6>=5
   defp eval([l, :roll, r, compare, v]) when is_integer(l) and is_integer(r) and is_integer(v) do
     faces = roll(l, r)

@@ -12,11 +12,16 @@ msgstr ""
 "Plural-Forms: nplurals=1\n"
 
 #, elixir-format
-#: lib/ast.ex:37
+#: lib/ast.ex:61
 msgid "fail"
 msgstr "失败"
 
 #, elixir-format
-#: lib/ast.ex:35
+#: lib/ast.ex:59
 msgid "success"
 msgstr "成功"
+
+#, elixir-format, fuzzy
+#: lib/ast.ex:38
+msgid "success count"
+msgstr "成功数"

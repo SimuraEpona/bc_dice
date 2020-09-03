@@ -33,9 +33,15 @@ defmodule BCDice.Parser do
     parsec(:roll) |> concat(compare) |> concat(int)
   )
 
+  defcombinatorp(
+    :barabara_roll_compare,
+    parsec(:barabara_roll) |> concat(compare) |> concat(int)
+  )
+
   defparsec(
     :parse,
     [
+      parsec(:barabara_roll_compare),
       parsec(:roll_compare),
       parsec(:barabara_roll),
       parsec(:roll)
