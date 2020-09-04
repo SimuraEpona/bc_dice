@@ -24,3 +24,8 @@ msgstr ""
 #: lib/ast.ex:38
 msgid "success count"
 msgstr ""
+
+#, elixir-format
+#: lib/bc_dice.ex:24
+msgid "  3D6 |> 3D6 dice\n  3D6>=10 |> 3D6 sum value is greater or equal than 10, available compare operation is >=, >, <=, <, =\n  3B6 |> the same as 3D6 dice, dont sum the value\n  3B6>=5 |> 3B6 is greater or equal than 5's dice count\n"
+msgstr ""

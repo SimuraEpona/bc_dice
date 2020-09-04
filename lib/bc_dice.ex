@@ -2,6 +2,7 @@ defmodule BCDice do
   @moduledoc """
   Documentation for `BCDice`.
   """
+  import BCDice.Gettext
 
   alias BCDice.Parser
   alias BCDice.Ast
@@ -17,6 +18,15 @@ defmodule BCDice do
     expression
     |> parse()
     |> Ast.compile()
+  end
+
+  def description() do
+    gettext("""
+      3D6 |> 3D6 dice
+      3D6>=10 |> 3D6 sum value is greater or equal than 10, available compare operation is >=, >, <=, <, =
+      3B6 |> the same as 3D6 dice, dont sum the value
+      3B6>=5 |> 3B6 is greater or equal than 5's dice count
+    """)
   end
 
   defp unwrap(result) do
